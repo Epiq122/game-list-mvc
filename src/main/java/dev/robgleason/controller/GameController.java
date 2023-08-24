@@ -1,47 +1,31 @@
 package dev.robgleason.controller;
 
-
 import dev.robgleason.entity.Game;
-import jakarta.annotation.PostConstruct;
+import dev.robgleason.service.GameService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import java.util.ArrayList;
 import java.util.List;
+
 
 @Controller
 @RequestMapping("/games")
 public class GameController {
 
-    // load game data
+    private GameService gameService;
 
-    private List<Game> theGames;
-
-    @PostConstruct
-    private void loadData() {
-
-        // create games
-
-        Game game1 = new Game("Baldurs Gate 3", "Larian Games", "larian@games.com");
-        Game game2 = new Game("The Witcher 4", "CD Projekt Red", "contact@cdprojektred.com");
-        Game game3 = new Game("Elder Scrolls VI", "Bethesda Game Studios", "info@bethesda.net");
-
-        // create the list
-        theGames = new ArrayList<>();
-
-        // add to the list
-        theGames.add(game1);
-        theGames.add(game2);
-        theGames.add(game3);
-
+    public GameController(GameService theGameService) {
+        gameService = theGameService;
     }
-
     // add mapping for "/list"
-    // add to the spring model
+
     @GetMapping("/list")
     public String listGames(Model theModel) {
+        // get the games from the DB
+        List<Game> theGames = gameService.findAll();
+        // add to the spring model
         theModel.addAttribute("games", theGames);
         return "list-games";
     }
