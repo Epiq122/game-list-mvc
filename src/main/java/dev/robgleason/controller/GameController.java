@@ -57,7 +57,12 @@ public class GameController {
 
         // send to the form
         return "games/game-form";
+    }
 
-
+    @GetMapping("/delete")
+    public String delete(@RequestParam("gameId") int theId) {
+        // delete the game
+        gameService.deleteById(theId);
+        return "redirect:/games/list";
     }
 }
