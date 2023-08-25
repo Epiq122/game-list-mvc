@@ -26,6 +26,7 @@
                 <th>Game Title</th>
                 <th>Game Developer</th>
                 <th>Email</th>
+                <th>Action</th>
             </tr>
             </thead>
 
@@ -35,6 +36,8 @@
                 <td th:text="${tempGame.gameTitle}"/>
                 <td th:text="${tempGame.gameDeveloper}"/>
                 <td th:text="${tempGame.email}"/>
+                <td><a th:href="@{/games/showFormForUpdate(gameId=${tempGame.id})}"
+                       class="btn btn-info btn-sm">Update</a></td>
 
             </tr>
             </tbody>

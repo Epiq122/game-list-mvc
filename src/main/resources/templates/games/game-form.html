@@ -13,6 +13,8 @@
         <h3>Game Directory</h3>
         <p class="h4 mb-4">Save Game</p>
         <form action="#" th:action="@{/games/save}" th:object="${game}" method="post">
+            <!--            Add hidden form field to handle update-->
+            <input type="hidden" th:field="*{id}">
             <input type="text" th:field="*{gameTitle}" placeholder="Game Title" class="form-control mb-4 w-25">
             <input type="text" th:field="*{gameDeveloper}" placeholder="Game Developer" class="form-control mb-4 w-25">
             <input type="text" th:field="*{email}" placeholder="Email" class="form-control mb-4 w-25">
